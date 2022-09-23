@@ -43,6 +43,7 @@ import org.keycloak.protocol.oidc.mappers.UserAttributeMapper;
 import org.keycloak.protocol.oidc.mappers.UserClientRoleMappingMapper;
 import org.keycloak.protocol.oidc.mappers.UserPropertyMapper;
 import org.keycloak.protocol.oidc.mappers.UserRealmRoleMappingMapper;
+import org.keycloak.protocol.oidc.mappers.GroupMembershipMapper;
 import org.keycloak.protocol.oidc.mappers.UserSessionNoteMapper;
 import org.keycloak.representations.IDToken;
 import org.keycloak.representations.idm.ClientRepresentation;
@@ -209,7 +210,7 @@ public class OIDCLoginProtocolFactory extends AbstractLoginProtocolFactory {
                 true, true);
         builtins.put(UPN, model);
 
-        model = UserRealmRoleMappingMapper.create(null, GROUPS, GROUPS, true, true, true);
+        model = GroupMembershipMapper.create(GROUPS, GROUPS, false, null, true, true);
         builtins.put(GROUPS, model);
 
         if (Profile.isFeatureEnabled(Profile.Feature.STEP_UP_AUTHENTICATION)) {
